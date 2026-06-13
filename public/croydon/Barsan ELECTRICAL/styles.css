@@ -567,36 +567,9 @@ p { line-height: 1.75; }
 .service-card:hover::before { transform: scaleX(1); }
 
 /* Featured first card — navy dark */
-.service-card:nth-child(1) {
-  background: linear-gradient(140deg, var(--navy) 0%, #1a3a7a 100%);
-  border-color: transparent;
-  color: white;
-}
-.service-card:nth-child(1) .service-title { color: var(--white); font-size: 1.15rem; }
-.service-card:nth-child(1) .service-desc { color: rgba(255,255,255,0.65); }
-.service-card:nth-child(1) .service-icon-wrap {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.15);
-  width: 56px; height: 56px;
-}
-.service-card:nth-child(1) .service-arrow { color: rgba(255,255,255,0.5); }
-.service-card:nth-child(1):hover {
-  background: linear-gradient(140deg, #1a3a7a 0%, var(--blue) 100%);
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-xl);
-}
-.service-card:nth-child(1)::before {
-  background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5));
-}
 
-/* Accent highlight on card 6 */
-.service-card:nth-child(6) {
-  background: var(--accent-glow);
-  border-color: rgba(59,125,255,0.18);
-}
-.service-card:nth-child(6):hover {
-  background: var(--white);
-}
+
+
 
 .service-icon-wrap {
   width: 48px;
@@ -919,19 +892,21 @@ p { line-height: 1.75; }
 .quote-inner {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
-  gap: 0;
+  gap: 24px;
   align-items: stretch;
   min-height: 600px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0;
   box-shadow: none;
 }
 /* Dark left panel */
 .quote-left {
   background: linear-gradient(160deg, var(--navy) 0%, #1a3a7a 60%, var(--blue) 100%);
-  padding: 64px 52px;
+  padding: 56px 48px;
   position: relative;
   overflow: hidden;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
 }
 /* Decorative circles in background */
 .quote-left::before {
@@ -961,8 +936,8 @@ p { line-height: 1.75; }
 .quote-left > p { color: rgba(255,255,255,0.65); font-size: 1rem; line-height: 1.75; margin-bottom: 36px; }
 /* White form right panel */
 .quote-right {
-  background: var(--white);
-  padding: 56px 52px;
+  background: transparent;
+  padding: 0;
 }
 .quote-left .section-tag { margin-bottom: 14px; }
 .quote-left .section-title { margin-bottom: 16px; }
@@ -977,52 +952,66 @@ p { line-height: 1.75; }
 .quote-contact-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  background: var(--grey-50);
+  gap: 16px;
+  padding: 18px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-md);
-  border: 1px solid var(--grey-100);
-  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 a.quote-contact-item:hover {
-  border-color: var(--blue);
-  background: var(--white);
-  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateX(6px) translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 .qc-icon {
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
   border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
+  color: #ffffff;
   flex-shrink: 0;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 .quote-contact-item > div {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 .qc-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
   font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 .quote-contact-item strong {
-  font-size: 0.92rem;
-  color: var(--text-dark);
+  font-size: 1.05rem;
+  color: #ffffff;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 /* Form */
 .quote-form,
 .form-success {
-  background: var(--grey-50);
+  background: var(--white);
   border-radius: var(--radius-xl);
-  padding: 40px;
+  padding: 56px 48px;
   border: 1px solid var(--grey-100);
   box-shadow: var(--shadow-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .form-title {
   font-size: 1.3rem;
@@ -1108,7 +1097,7 @@ a.quote-contact-item:hover {
 /* ═══════════════════════════════════════════════
    MAP
    ═══════════════════════════════════════════════ */
-.map-section { background: var(--grey-50); padding-top: 64px; padding-bottom: 0; }
+.map-section { background: var(--grey-50); padding-top: 64px; padding-bottom: 64px; }
 .map-inner {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
@@ -1158,7 +1147,7 @@ a.quote-contact-item:hover {
 .map-phone:hover { text-decoration: underline; }
 .map-embed {
   height: 480px;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-xl);
 }
@@ -1396,4 +1385,94 @@ a.quote-contact-item:hover {
   .trust-pill { font-size: 0.75rem; padding: 5px 10px; }
   .hero-ctas { flex-direction: column; }
   .hero-ctas .btn-lg { width: 100%; justify-content: center; }
+}
+
+/* -----------------------------------------------
+   REVIEWS CAROUSEL ANIMATION
+   ----------------------------------------------- */
+.reviews-carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  padding: 10px 0;
+}
+
+.reviews-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: scroll-carousel 25s linear infinite;
+}
+
+.reviews-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 8px)); }
+}
+
+.reviews-carousel .review-card {
+  width: 320px;
+  flex-shrink: 0;
+  /* Reset margins/transforms that might be conflicting */
+  margin: 0;
+}
+
+/* -----------------------------------------------
+   UPDATED CONTACT ITEM CARDS (Glassmorphism UI)
+   ----------------------------------------------- */
+.quote-contact-item {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 18px 20px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-radius: var(--radius-md) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+}
+a.quote-contact-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateX(6px) translateY(-2px) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15) !important;
+}
+.qc-icon {
+  width: 48px !important;
+  height: 48px !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
+  border-radius: var(--radius-sm) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #ffffff !important;
+  flex-shrink: 0 !important;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15) !important;
+}
+.quote-contact-item > div {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+.qc-label {
+  font-size: 0.78rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: uppercase !important;
+}
+.quote-contact-item strong {
+  font-size: 1.05rem !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
 }

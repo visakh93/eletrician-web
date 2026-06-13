@@ -226,3 +226,35 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  /* ------------------------------------------
+     REVIEWS CAROUSEL (Infinite Scroll)
+  ------------------------------------------ */
+  const reviewsGrid = document.querySelector('.reviews-grid');
+  if (reviewsGrid) {
+    // Change to carousel container
+    reviewsGrid.classList.remove('reviews-grid');
+    reviewsGrid.classList.add('reviews-carousel');
+
+    // Wrap children in a track
+    const track = document.createElement('div');
+    track.classList.add('reviews-track');
+    
+    // Move all existing cards into the track
+    while (reviewsGrid.firstChild) {
+      track.appendChild(reviewsGrid.firstChild);
+    }
+    
+    // Duplicate cards for infinite loop
+    const cards = Array.from(track.children);
+    cards.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+    
+    reviewsGrid.appendChild(track);
+  }
+});
