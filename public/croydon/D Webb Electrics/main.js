@@ -230,31 +230,65 @@ document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', () => {
   /* ------------------------------------------
-     REVIEWS CAROUSEL (Infinite Scroll)
+     REVIEWS CAROUSEL (Seamless Infinite Scroll)
   ------------------------------------------ */
   const reviewsGrid = document.querySelector('.reviews-grid');
-  if (reviewsGrid) {
-    // Change to carousel container
-    reviewsGrid.classList.remove('reviews-grid');
-    reviewsGrid.classList.add('reviews-carousel');
+  if (!reviewsGrid) return;
 
-    // Wrap children in a track
-    const track = document.createElement('div');
-    track.classList.add('reviews-track');
-    
-    // Move all existing cards into the track
-    while (reviewsGrid.firstChild) {
-      track.appendChild(reviewsGrid.firstChild);
-    }
-    
-    // Duplicate cards for infinite loop
-    const cards = Array.from(track.children);
-    cards.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      track.appendChild(clone);
+  // Collect original cards before moving
+  const originalCards = Array.from(reviewsGrid.children);
+
+  // Convert to carousel container
+  reviewsGrid.classList.remove('reviews-grid');
+  reviewsGrid.classList.add('reviews-carousel');
+
+  // Create track
+  const track = document.createElement('div');
+  track.classList.add('reviews-track');
+  track.style.animation = 'none'; // pause until we know the width
+
+  // Move originals into track
+  originalCards.forEach(card => track.appendChild(card));
+
+  // Add FIRST clone set so there's always content after originals
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+
+  // Add SECOND clone set for extra safety on wide screens
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  });
+
+  reviewsGrid.appendChild(track);
+
+  // After paint: measure the exact distance between the first card and the first clone card
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const allCards = track.querySelectorAll('.review-card');
+      const firstCard = allCards[0];
+      const firstClone = allCards[originalCards.length];
+      
+      if (firstCard && firstClone) {
+        // This gets the exact offset (width + gap) from the start of the first card to the start of the first clone card
+        const totalWidth = firstClone.getBoundingClientRect().left - firstCard.getBoundingClientRect().left;
+
+        const styleTag = document.createElement('style');
+        styleTag.textContent = `
+          @keyframes scroll-carousel {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(-${totalWidth}px); }
+          }
+        `;
+        document.head.appendChild(styleTag);
+      }
+
+      // Now start the animation
+      track.style.animation = '';
     });
-    
-    reviewsGrid.appendChild(track);
-  }
+  });
 });
